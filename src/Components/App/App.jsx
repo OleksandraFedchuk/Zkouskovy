@@ -9,15 +9,11 @@ export default function App() {
   const [coffeeSize, setCoffeeSize] = useState("sm");
   0;
 
-  const handleCoffeeSize = (event) => {
-    setCoffeeSize(event.target.value);
-  };
-
   return (
     <>
       <p>Select language : {lang}</p>
       <Langswitcher value={lang} onSelect={setLang} />
-      <Coffee value={coffeeSize} onSelect={handleCoffeeSize} />
+      <Coffee value={coffeeSize} onSelect={setCoffeeSize} />
       <Checkbox />
     </>
   );
