@@ -3,6 +3,7 @@ import Langswitcher from "../Langswitcher/Langswitcher";
 import Coffee from "../Coffee/Coffee";
 import "./App.css";
 import Checkbox from "../Checkbox/Checkbox";
+import FormikForm from "../FormikForm/FormikForm";
 
 export default function App() {
   const [lang, setLang] = useState("en");
@@ -15,6 +16,7 @@ export default function App() {
       <Langswitcher value={lang} onSelect={setLang} />
       <Coffee value={coffeeSize} onSelect={setCoffeeSize} />
       <Checkbox />
+      <FormikForm />
     </>
   );
 }
