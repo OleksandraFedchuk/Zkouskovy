@@ -2,6 +2,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useId } from "react";
 import { ErrorMessage } from "formik";
+import css from "../FormikForm/FormikForm.module.css";
 
 export default function FormikForm() {
   const FeedbackSchema = Yup.object().shape({
@@ -29,9 +30,14 @@ export default function FormikForm() {
       onSubmit={handleSubmit}
       validationSchema={FeedbackSchema}
     >
-      <Form>
+      <Form className={css.form}>
         <label htmlFor={nameFieldId}>Username</label>
-        <Field type="text" name="username" id={nameFieldId} />
+        <Field
+          className={css.field}
+          type="text"
+          name="username"
+          id={nameFieldId}
+        />
         <ErrorMessage name="username" component="span" />
         <label htmlFor={mailFieldId}>Mail</label>
         <Field type="email" name="email" id={mailFieldId} />
