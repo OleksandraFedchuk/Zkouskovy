@@ -1,8 +1,79 @@
+/* Container styles for the form */
 .form {
-  display: flex;
-  flex-direction: row;
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  font-family: "Arial", sans-serif;
 }
 
+/* Style for all labels */
+.form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Style for input fields and textarea */
 .field {
-  max-width: 70px;
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.field:focus {
+  border-color: #0066ff;
+  box-shadow: 0 0 8px rgba(0, 102, 255, 0.3);
+  outline: none;
+}
+
+/* Style for error messages */
+span {
+  color: #d9534f;
+  font-size: 14px;
+  display: block;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+/* Style for the select dropdown */
+select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+select:focus {
+  border-color: #0066ff;
+  box-shadow: 0 0 8px rgba(0, 102, 255, 0.3);
+  outline: none;
+}
+
+/* Style for the submit button */
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #0066ff;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #0052cc;
+  transform: translateY(-2px);
 }

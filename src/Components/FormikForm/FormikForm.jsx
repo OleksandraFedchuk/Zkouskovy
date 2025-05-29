@@ -31,7 +31,9 @@ export default function FormikForm() {
       validationSchema={FeedbackSchema}
     >
       <Form className={css.form}>
-        <label htmlFor={nameFieldId}>Username</label>
+        <label htmlFor={nameFieldId} className={css.label}>
+          Username
+        </label>
         <Field
           className={css.field}
           type="text"
@@ -39,20 +41,42 @@ export default function FormikForm() {
           id={nameFieldId}
         />
         <ErrorMessage name="username" component="span" />
-        <label htmlFor={mailFieldId}>Mail</label>
-        <Field type="email" name="email" id={mailFieldId} />
+        <label htmlFor={mailFieldId} className={css.label}>
+          Mail
+        </label>
+        <Field
+          className={css.field}
+          type="email"
+          name="email"
+          id={mailFieldId}
+        />
         <ErrorMessage name="email" component="span" />
-        <label htmlFor={msgFieldId}>Message</label>
-        <Field as="textarea" name="message" id={msgFieldId} row="5" />
+        <label htmlFor={msgFieldId} className={css.label}>
+          Message
+        </label>
+        <Field
+          as="textarea"
+          className={css.field}
+          name="message"
+          id={msgFieldId}
+          row="5"
+        />
         <ErrorMessage name="message" component="span" />
         <label htmlFor={msgFieldId}>Level of satisfaction</label>
-        <Field as="select" name="level" id={levelFieldId}>
+        <Field
+          as="select"
+          className={`${css.field}${css.select}`}
+          name="level"
+          id={levelFieldId}
+        >
           <option value="good">Good</option>
           <option value="bad">Bad</option>
           <option value="neutral">Neutral</option>m
         </Field>
         <ErrorMessage name="level" component="span" />
-        <button type="submit">Submit</button>
+        <button type="submit" className={css.button}>
+          Submit
+        </button>
       </Form>
     </Formik>
   );
