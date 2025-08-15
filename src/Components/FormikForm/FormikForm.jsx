@@ -19,6 +19,7 @@ export default function FormikForm() {
   const mailFieldId = useId();
   const msgFieldId = useId();
   const levelFieldId = useId();
+  const deliveryOption = useId();
 
   const handleSubmit = (values, actions) => {
     console.log(values);
@@ -26,7 +27,14 @@ export default function FormikForm() {
   };
   return (
     <Formik
-      initialValues={{ username: "", email: "", message: "", level: "good" }}
+      initialValues={{
+        username: "",
+        email: "",
+        message: "",
+        level: "good",
+        delivery: "pickup",
+        restrictions: [],
+      }}
       onSubmit={handleSubmit}
       validationSchema={FeedbackSchema}
     >
@@ -74,6 +82,36 @@ export default function FormikForm() {
           <option value="neutral">Neutral</option>m
         </Field>
         <ErrorMessage name="level" component="span" />
+        <label htmlForm={deliveryOption} className={css.label}>
+          Delivery Options
+        </label>
+        <label>
+          <Field type="radio" name="delivery" value="pickup" />
+          Pickup
+        </label>
+        <label>
+          <Field type="radio" name="delivery" value="courier" />
+          Courier
+        </label>
+        <label>
+          <Field type="radio" name="delivery" value="drone" />
+          Drone delivery
+        </label>
+
+        <label htmlFor={`${nameFieldId}-restrictions`}>Restrictions</label>
+        <label>
+          <Field type="checkbox" name="restrictions" value="vegan" />
+          Vegan
+        </label>
+        <label>
+          <Field type="checkbox" name="restrictions" value="gluten-free" />
+          Gluten-free
+        </label>
+        <label>
+          <Field type="checkbox" name="restrictions" value="nut-free" />
+          Nut-free
+        </label>
+
         <button type="submit" className={css.button}>
           Submit
         </button>
