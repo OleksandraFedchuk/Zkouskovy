@@ -5,6 +5,15 @@ import { ErrorMessage } from "formik";
 import css from "../FormikForm/FormikForm.module.css";
 
 export default function FormikForm() {
+  const initialValues = {
+    username: "",
+    email: "",
+    message: "",
+    level: "good",
+    delivery: "pickup",
+    restrictions: [],
+  };
+
   const FeedbackSchema = Yup.object().shape({
     username: Yup.string()
       .min(2, "Too short!")
@@ -19,103 +28,108 @@ export default function FormikForm() {
   const mailFieldId = useId();
   const msgFieldId = useId();
   const levelFieldId = useId();
-  const deliveryOption = useId();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
+    await new Promise((r) => setTimeout(r, 5000));
     console.log(values);
     actions.resetForm();
   };
   return (
     <Formik
-      initialValues={{
-        username: "",
-        email: "",
-        message: "",
-        level: "good",
-        delivery: "pickup",
-        restrictions: [],
-      }}
+      initialValues={initialValues}
       onSubmit={handleSubmit}
       validationSchema={FeedbackSchema}
     >
-      <Form className={css.form}>
-        <label htmlFor={nameFieldId} className={css.label}>
-          Username
-        </label>
-        <Field
-          className={css.field}
-          type="text"
-          name="username"
-          id={nameFieldId}
-        />
-        <ErrorMessage name="username" component="span" />
-        <label htmlFor={mailFieldId} className={css.label}>
-          Mail
-        </label>
-        <Field
-          className={css.field}
-          type="email"
-          name="email"
-          id={mailFieldId}
-        />
-        <ErrorMessage name="email" component="span" />
-        <label htmlFor={msgFieldId} className={css.label}>
-          Message
-        </label>
-        <Field
-          as="textarea"
-          className={css.field}
-          name="message"
-          id={msgFieldId}
-          row="5"
-        />
-        <ErrorMessage name="message" component="span" />
-        <label htmlFor={msgFieldId}>Level of satisfaction</label>
-        <Field
-          as="select"
-          className={`${css.field}${css.select}`}
-          name="level"
-          id={levelFieldId}
-        >
-          <option value="good">Good</option>
-          <option value="bad">Bad</option>
-          <option value="neutral">Neutral</option>m
-        </Field>
-        <ErrorMessage name="level" component="span" />
-        <label htmlForm={deliveryOption} className={css.label}>
-          Delivery Options
-        </label>
-        <label>
-          <Field type="radio" name="delivery" value="pickup" />
-          Pickup
-        </label>
-        <label>
-          <Field type="radio" name="delivery" value="courier" />
-          Courier
-        </label>
-        <label>
-          <Field type="radio" name="delivery" value="drone" />
-          Drone delivery
-        </label>
+      {(props) => {
+        console.log(props.isSubmitting);
+        return (
+          <Form className={css.form}>
+            <label htmlFor={nameFieldId} className={css.label}>
+              Username
+            </label>
+            <Field
+              className={css.field}
+              type="text"
+              name="username"
+              id={nameFieldId}
+            />
+            <ErrorMessage name="username" component="span" />
+            <label htmlFor={mailFieldId} className={css.label}>
+              Mail
+            </label>
+            <Field
+              className={css.field}
+              type="email"
+              name="email"
+              id={mailFieldId}
+            />
+            <ErrorMessage name="email" component="span" />
+            <label htmlFor={msgFieldId} className={css.label}>
+              Message
+            </label>
+            <Field
+              as="textarea"
+              className={css.field}
+              name="message"
+              id={msgFieldId}
+              row="5"
+            />
+            <ErrorMessage name="message" component="span" />
+            <label htmlFor={msgFieldId}>Level of satisfaction</label>
+            <Field
+              as="select"
+              className={`${css.field}${css.select}`}
+              name="level"
+              id={levelFieldId}
+            >
+              <option value="good">Good</option>
+              <option value="bad">Bad</option>
+              <option value="neutral">Neutral</option>m
+            </Field>
+            <ErrorMessage name="level" component="span" />
 
-        <label htmlFor={`${nameFieldId}-restrictions`}>Restrictions</label>
-        <label>
-          <Field type="checkbox" name="restrictions" value="vegan" />
-          Vegan
-        </label>
-        <label>
-          <Field type="checkbox" name="restrictions" value="gluten-free" />
-          Gluten-free
-        </label>
-        <label>
-          <Field type="checkbox" name="restrictions" value="nut-free" />
-          Nut-free
-        </label>
+            <fieldset>
+              <legend>Delivery options</legend>
+              <label>
+                <Field type="radio" name="delivery" value="pickup" />
+                Pickup
+              </label>
+              <label>
+                <Field type="radio" name="delivery" value="courier" />
+                Courier
+              </label>
+              <label>
+                <Field type="radio" name="delivery" value="drone" />
+                Drone delivery
+              </label>
+            </fieldset>
 
-        <button type="submit" className={css.button}>
-          Submit
-        </button>
-      </Form>
+            <fieldset>
+              <legend>Restrictions</legend>
+              <label>
+                <Field type="checkbox" name="restrictions" value="vegan" />
+                Vegan
+              </label>
+              <label>
+                <Field
+                  type="checkbox"
+                  name="restrictions"
+                  value="gluten-free"
+                />
+                Gluten-free
+              </label>
+              <label>
+                <Field type="checkbox" name="restrictions" value="nut-free" />
+                Nut-free
+              </label>
+            </fieldset>
+
+            <button type="submit" className={css.button}>
+              {props.isSubmitting ? "Submitting Form .." : "Submit Form"}
+            </button>
+          </Form>
+        );
+      }}
     </Formik>
   );
 }
